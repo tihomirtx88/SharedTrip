@@ -25,7 +25,7 @@ async function register(email, password, gender){
 async function login(email,password){
     const user = await getUserByEmail(email);
 
-    if (!existing) {
+    if (!user) {
         throw new Error(`Incorrect email or password`);
     }
 
