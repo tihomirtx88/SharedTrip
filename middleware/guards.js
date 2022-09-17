@@ -18,7 +18,20 @@ function isGuest(){
     }
 }
 
+function isOwner(){
+    return async function(req, res, next){
+        const userId = req.session.user?._id;
+        //Todo change the propery name to match collection
+        if (res.locals.data.owner == userId) {
+            next();
+        }else{
+            res.redirect(`/login`);
+        }       
+    }
+}
+
 module.exports = {
     isGuest,
-    isUser
+    isUser,
+    isOwner
 }

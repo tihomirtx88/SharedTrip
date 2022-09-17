@@ -2,7 +2,7 @@ const mongoose = require(`mongoose`);
 require(`../models/User`);
 
 //Todo change database name 
-const dababaseName = `wildlife`
+const dababaseName = `sharedTrip`
 const conetctionString = `mongodb://localhost:27017/${dababaseName}`
 
 module.exports = async(app) =>{
