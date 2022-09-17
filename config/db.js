@@ -1,5 +1,6 @@
 const mongoose = require(`mongoose`);
 require(`../models/User`);
+require(`../models/Trip`);
 
 //Todo change database name 
 const dababaseName = `sharedTrip`

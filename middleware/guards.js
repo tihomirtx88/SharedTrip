@@ -22,7 +22,7 @@ function isOwner(){
     return async function(req, res, next){
         const userId = req.session.user?._id;
         //Todo change the propery name to match collection
-        if (res.locals.data.owner == userId) {
+        if (res.locals.trip.owner == userId) {
             next();
         }else{
             res.redirect(`/login`);
