@@ -22,24 +22,24 @@ async function register(email,password,gender){
    return user;
 }
 
-async function login(username,password){
-    const user = await getUserByEmail(username);
+async function login(email,password){
+    const user = await getUserByEmail(email);
 
     if (!existing) {
-        throw new Error(`Incorrect username or password`);
+        throw new Error(`Incorrect email or password`);
     }
 
     const hasMatch = await compare(password, user.hashedPassword);
     if (!hasMatch) {
-        throw new Error(`Incorrect username or password`);
+        throw new Error(`Incorrect email or password`);
     }
 
     return user;
 }
 
 //Identify user by identifier
-async function getUserByEmail(username){
-    const user = await User.findOne({username: new RegExp(`^${username}$`, `i`)});
+async function getUserByEmail(email){
+    const user = await User.findOne({email: new RegExp(`^${email}$`, `i`)});
 
     return user;
 }
