@@ -8,12 +8,12 @@ router.get(`/register`,isGuest() ,(req, res) => {
     res.render(`register`);
 });
 
-router.post(`/register`,isGuest() , async(req, res) => {
+router.post(`/register`, isGuest() , async(req, res) => {
     try {
-        if (req.body.password.trim() != ``) {
+        if (req.body.password.trim() == ``) {
             throw new Error(`Password is required`);
         }
-        if (req.body.password != req.body.repeatPassword) {
+        if (req.body.password != req.body.rePassword) {
             throw new Error(`Password don/t match`);
         }
         
@@ -23,7 +23,8 @@ router.post(`/register`,isGuest() , async(req, res) => {
     } catch (err) {
         console.error(err);
         const errors = mapErrors(err);
-        res.render(`register`, { data: {email: req.body.email, gender: req.body.gender}, errors});
+        const isMale = req.body.gender == `male` 
+        res.render(`register`, { data: {email: req.body.email, isMale}, errors});
     }  
 });
 

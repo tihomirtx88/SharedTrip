@@ -2,7 +2,7 @@ const User = require(`../models/User`);
 const {hash, compare} = require(`bcrypt`);
 
 //TODO all fields 
-async function register(email,password,gender){
+async function register(email, password, gender){
    const existing = await getUserByEmail(email);
 
    if (existing) {
@@ -11,11 +11,11 @@ async function register(email,password,gender){
 
    const hashedPassword = await hash(password, 10);
 
-   const user = {
+   const user = new User({
        email,
        hashedPassword,
        gender
-   }
+   })
 
    await user.save();
 
