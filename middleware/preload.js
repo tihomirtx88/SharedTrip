@@ -1,11 +1,13 @@
 const tripService = require(`../services/tripService`);
 
-function preload(){
+function preload(populate){
     return async function(req, res, next){
         const id = req.params.id;
-        //Todo change the propery name to match collection
-        const trip = await tripService.getTripById(id);
-        res.locals.trip = trip;
+        if (populate) {
+            res.locals.trip = await tripService.getTripAndUsers(id);
+        }else{
+            res.locals.trip = await tripService.getTripById(id);
+        }  
         next();
     }
 }
