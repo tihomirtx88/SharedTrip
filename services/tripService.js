@@ -48,6 +48,10 @@ async function joinTrip(tripId, userId){
     await trip.save();
 }
 
+async function getTripsByUser(userId){
+   return Trip.find({owner: userId}).lean();
+}
+
 module.exports = {
     createTrip,
     getTripById,
@@ -55,5 +59,6 @@ module.exports = {
     getTripAndUsers,
     updateTrip,
     deleteTrip,
-    joinTrip
+    joinTrip,
+    getTripsByUser
 }

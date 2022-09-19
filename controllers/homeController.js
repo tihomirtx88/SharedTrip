@@ -1,5 +1,6 @@
+const { isUser } = require("../middleware/guards");
 const preload = require("../middleware/preload");
-const { getAllTrips } = require("../services/tripService");
+const { getAllTrips, getTripsByUser } = require("../services/tripService");
 
 const router = require(`express`).Router();
 
@@ -15,6 +16,7 @@ router.get(`/trips`, async(req, res) => {
 router.get(`/trips/:id`,preload(true), async(req, res) => {
     const trip = res.locals.trip;
     trip.reaminingSeats = trip.seats - trip.buddies.length;
+    trip.buddiesList = trip.buddies.map(b => b.email).join(`, `);;
     if (req.session.user) {
         trip.hasUser = true;
         trip.isOwner = req.session.user._id == trip.owner._id;  
@@ -24,6 +26,12 @@ router.get(`/trips/:id`,preload(true), async(req, res) => {
         }
     }
     res.render(`details`, {title: `Trip Details`});
+});
+
+router.get(`/profile`, isUser(), async(req, res) => {
+    const tripsByUser = await getTripsByUser(res.locals.user._id);
+    res.locals.user.tripsCount = tripsByUser.length;
+    res.render(`profile`, {title: `Profile Page`});
 });
 
 
