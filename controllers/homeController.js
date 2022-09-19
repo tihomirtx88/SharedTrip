@@ -31,6 +31,7 @@ router.get(`/trips/:id`,preload(true), async(req, res) => {
 router.get(`/profile`, isUser(), async(req, res) => {
     const tripsByUser = await getTripsByUser(res.locals.user._id);
     res.locals.user.tripsCount = tripsByUser.length;
+    res.locals.user.trips = tripsByUser;
     res.render(`profile`, {title: `Profile Page`});
 });
 
