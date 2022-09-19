@@ -1,5 +1,7 @@
 const { model, Schema, Types: {ObjectId} } = require("mongoose");
 
+const URL_PATERN = /^https?:\/\/(.+)$/
+
 const tripSchema = new Schema({
     start: {
         type: String,

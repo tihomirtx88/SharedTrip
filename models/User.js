@@ -1,10 +1,17 @@
 const { model, Schema, Types: {ObjectId} } = require("mongoose");
 
-//TODO add validation
+const EMAIL_PATERM = /^([a-zA-Z]+)$([a-zA-Z]+)\.([a-zA-Z]+)$/
+
 const userSchema = new Schema({
     email: {
         type: String,
-        required: true
+        required: true,
+        validate: {
+            validator(value){
+               return EMAIL_PATERM.test(value);
+            },
+            message: `Email must be valid!!`
+        }
     },
     hashedPassword: {
         type: String,
@@ -12,7 +19,8 @@ const userSchema = new Schema({
     },
     gender: {
         type: String,
-        required: true
+        required: true,
+        enum: [`male`, `female`]
     },
     trips: {
         type: [ObjectId],
