@@ -19,6 +19,7 @@
   "homepage": "https://github.com/tihomirtx88/Wildlife-Photography#readme",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "dotenv": "^17.2.3",
     "express": "^4.18.1",
     "express-handlebars": "^6.0.6",
     "express-session": "^1.17.3",

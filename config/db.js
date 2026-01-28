@@ -2,28 +2,26 @@ const mongoose = require(`mongoose`);
 require(`../models/User`);
 require(`../models/Trip`);
 
-//Todo change database name 
-const dababaseName = `sharedTrip`
-const conetctionString = `mongodb://localhost:27017/${dababaseName}`
+require('dotenv').config();
 
-module.exports = async(app) =>{
+const CONNECTION_STRING = process.env.MONGODB_URI || process.env.LOCAL_DB;
+
+module.exports = async () => {
     try {
-
-        await mongoose.connect(conetctionString, {
+        await mongoose.connect(CONNECTION_STRING, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
-    
-        })
-    
-        console.log(`Database is contected`);
-    
-        mongoose.connection.on(`error`, (err) => {
+        });
+
+        console.log(`Database is connected`);
+
+        mongoose.connection.on('error', (err) => {
             console.error(`Database error`);
             console.error(err);
         });
-
     } catch (err) {
-        console.error(`Error connetion on database`);
-        process.exit(1)
+        console.error(`Error connection on database`);
+        console.error(err);
+        process.exit(1);
     }
-}
+};
