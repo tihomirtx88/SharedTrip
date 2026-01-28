@@ -4,8 +4,8 @@
   "description": "Get acquainted with the provided HTML and CSS and create an application for sharing posts of wildlife.",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
-    "debug": "index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "repository": {
     "type": "git",
