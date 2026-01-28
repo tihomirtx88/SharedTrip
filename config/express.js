@@ -11,6 +11,7 @@ module.exports = (app) => {
     }).engine,
   );
   app.set(`view engine`, `.hbs`);
+  app.set('trust proxy', 1);
 
   app.use(`/static`, express.static(`static`));
 
